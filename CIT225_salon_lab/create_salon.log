@@ -1,0 +1,217 @@
+SQL> SET FEEDBACK ON
+SQL> SET NULL '<Null>'
+SQL> SET PAGESIZE 999
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> 
+SQL> DROP SEQUENCE tran_detail_s1;
+
+Sequence dropped.
+
+SQL> DROP SEQUENCE tran_s1;
+
+Sequence dropped.
+
+SQL> DROP SEQUENCE employee_s1;
+
+Sequence dropped.
+
+SQL> DROP SEQUENCE location_s1;
+
+Sequence dropped.
+
+SQL> DROP SEQUENCE customer_s1;
+
+Sequence dropped.
+
+SQL> DROP SEQUENCE product_s1;
+
+Sequence dropped.
+
+SQL> 
+SQL> DROP TABLE tran_detail;
+
+Table dropped.
+
+SQL> DROP TABLE tran;
+
+Table dropped.
+
+SQL> DROP TABLE employee;
+
+Table dropped.
+
+SQL> DROP TABLE location;
+
+Table dropped.
+
+SQL> DROP TABLE customer;
+
+Table dropped.
+
+SQL> DROP TABLE product;
+
+Table dropped.
+
+SQL> 
+SQL> -- Your code goes here --
+SQL> CREATE TABLE customer
+  2  ( customer_id	      NUMBER
+  3  , name		      VARCHAR2(45)
+  4  , email		      VARCHAR2(45)
+  5  , phone		      CHAR(10)
+  6  , CONSTRAINT pk_customer PRIMARY KEY(customer_id)
+  7  );
+
+Table created.
+
+SQL> 
+SQL> -- sequence object to move through customers by customer_id --
+SQL> CREATE SEQUENCE customer_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- unique index does not allow same customer name and phone number --
+SQL> CREATE UNIQUE INDEX customer_idx1 ON customer(name, phone);
+
+Index created.
+
+SQL> 
+SQL> -- Location Table--
+SQL> CREATE TABLE location
+  2  ( location_id	   NUMBER
+  3  , address1 	   VARCHAR2(45) CONSTRAINT nn_location_1 NOT NULL
+  4  , address2 	   VARCHAR2(45)
+  5  , city		   VARCHAR2(45) CONSTRAINT nn_location_2 NOT NULL
+  6  , state		   CHAR(2)	CONSTRAINT nn_location_3 NOT NULL
+  7  , zip		   CHAR(5)	CONSTRAINT nn_location_4 NOT NULL
+  8  , CONSTRAINT pk_location PRIMARY KEY(location_id)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> -- create sequence --
+SQL> CREATE SEQUENCE location_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- create unique index --
+SQL> CREATE UNIQUE INDEX location_idx1 ON location(address1,zip);
+
+Index created.
+
+SQL> 
+SQL> -- Product Table --
+SQL> CREATE TABLE product
+  2  ( product_id	   NUMBER
+  3  , name		   VARCHAR2(45) CONSTRAINT nn_product_1 NOT NULL
+  4  , type		   VARCHAR2(45) CONSTRAINT nn_product_2 NOT NULL
+  5  , unit_size	   VARCHAR2(45)
+  6  , price		   NUMBER(6,2)	CONSTRAINT nn_product_3 NOT NULL
+  7  , CONSTRAINT pk_product PRIMARY KEY(product_id)
+  8  );
+
+Table created.
+
+SQL> 
+SQL> -- create sequence --
+SQL> CREATE SEQUENCE product_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- create unique index
+SQL> CREATE UNIQUE INDEX product_idx1 ON product(name, type, unit_size);
+
+Index created.
+
+SQL> 
+SQL> -- Employee Table --
+SQL> CREATE TABLE employee
+  2  ( employee_id	   Number
+  3  , name		   VARCHAR2(45) CONSTRAINT nn_employee_1 NOT NULL
+  4  , title		   VARCHAR2(45) CONSTRAINT nn_employee_2 NOT NULL
+  5  , hire_date	   DATE 	CONSTRAINT nn_employee_3 NOT NULL
+  6  , termination_date    DATE
+  7  , email		   VARCHAR2(45) CONSTRAINT nn_employee_4 NOT NULL
+  8  , phone		   CHAR(10)	CONSTRAINT nn_employee_5 NOT NULL
+  9  , location_id	   NUMBER	CONSTRAINT nn_employee_6 NOT NULL
+ 10  , manager_id	   NUMBER
+ 11  , CONSTRAINT pk_employee PRIMARY KEY(employee_id)
+ 12  , CONSTRAINT fk_location FOREIGN KEY(location_id) REFERENCES location(location_id)
+ 13  , CONSTRAINT fk_manager FOREIGN KEY(manager_id) REFERENCES employee(employee_id)
+ 14  );
+
+Table created.
+
+SQL> 
+SQL> -- create sequence --
+SQL> CREATE SEQUENCE employee_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- do not allow multiple employees with the same name, phone, or email --
+SQL> CREATE UNIQUE INDEX employee_idx1 ON employee(email);
+
+Index created.
+
+SQL> 
+SQL> 
+SQL> -- Transaction Table --
+SQL> CREATE TABLE tran
+  2  ( tran_id		   NUMBER
+  3  , tran_date	   DATE   CONSTRAINT nn_tran_1 NOT NULL
+  4  , employee_id	   NUMBER CONSTRAINT nn_tran_2 NOT NULL
+  5  , customer_id	   NUMBER CONSTRAINT nn_tran_3 NOT NULL
+  6  , CONSTRAINT pk_tran PRIMARY KEY(tran_id)
+  7  , CONSTRAINT fk_employee FOREIGN KEY(employee_id) REFERENCES employee(employee_id)
+  8  , CONSTRAINT fk_customer FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> -- create sequence --
+SQL> CREATE SEQUENCE tran_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- create unique index --
+SQL> CREATE UNIQUE INDEX tran_idx1 ON  tran(customer_id, employee_id, tran_date);
+
+Index created.
+
+SQL> 
+SQL> -- Transaction Detail Table --
+SQL> CREATE TABLE tran_detail
+  2  ( tran_detail_id	   NUMBER
+  3  , tran_id		   NUMBER      CONSTRAINT  nn_tran_detail_1 NOT NULL
+  4  , product_id	   NUMBER      CONSTRAINT  nn_tran_detail_2 NOT NULL
+  5  , amount_charged	   NUMBER(6,2) CONSTRAINT  nn_tran_detail_3 NOT NULL
+  6  , CONSTRAINT pk_tran_detail PRIMARY KEY(tran_detail_id)
+  7  , CONSTRAINT fk_tran_id FOREIGN KEY(tran_id) REFERENCES tran(tran_id)
+  8  , CONSTRAINT fk_product FOREIGN KEY(product_id) REFERENCES product(product_id)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> -- create sequence --
+SQL> CREATE SEQUENCE tran_detail_s1 START WITH 1;
+
+Sequence created.
+
+SQL> 
+SQL> -- CREATE UNIQUE INDEX tran_detail_idx1 ON tran_detail(tran_id, product_id, amount_charged);
+SQL> CREATE UNIQUE INDEX tran_detail_idx1 ON tran_detail(tran_id, product_id, amount_charged);
+
+Index created.
+
+SQL> 
+SQL> -- Close log file.
+SQL> SPOOL OFF;

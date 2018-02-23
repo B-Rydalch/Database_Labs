@@ -1,0 +1,451 @@
+SQL> 
+SQL> INSERT INTO location
+  2  VALUES(
+  3    location_s1.nextval
+  4  , '100 N Main St.'
+  5  , 'Suite 3'
+  6  , 'Rexburg'
+  7  , 'ID'
+  8  , '83441');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO employee
+  2  VALUES (
+  3    employee_s1.nextval
+  4  , 'Jenny Jensen'
+  5  , 'Owner'
+  6  , '15-JUN-13'
+  7  , NULL
+  8  , 'jensinj@salon.com'
+  9  , '2081112222'
+ 10  , location_s1.currval
+ 11  , null
+ 12  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO employee
+  2  VALUES (
+  3    employee_s1.nextval
+  4  , 'Haley Lopez'
+  5  , 'Assistant Manager'
+  6  , '23-AUG-13'
+  7  , NULL
+  8  , 'lopezh@salon.com'
+  9  , '2083334444'
+ 10  , location_s1.currval
+ 11  , (SELECT employee_id FROM employee WHERE name = 'Jenny Jensen')
+ 12  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO employee
+  2  VALUES (
+  3    employee_s1.nextval
+  4  , 'Robert Green'
+  5  , 'Associate'
+  6  , '03-JAN-14'
+  7  , NULL
+  8  , 'greenr@salon.com'
+  9  , '2085556666'
+ 10  , location_s1.currval
+ 11  , (SELECT employee_id FROM employee WHERE name = 'Haley Lopez')
+ 12  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO location
+  2  VALUES(
+  3    location_s1.nextval
+  4  , '200 N Center St.'
+  5  , NULL
+  6  , 'Rigby'
+  7  , 'ID'
+  8  , '83442');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO employee
+  2  VALUES (
+  3    employee_s1.nextval
+  4  , 'Olive Adams'
+  5  , 'Manager'
+  6  , '12-JUL-15'
+  7  , NULL
+  8  , 'adamso@salon.com'
+  9  , '2087778888'
+ 10  , location_s1.currval
+ 11  , (SELECT employee_id FROM employee WHERE name = 'Jenny Jensen')
+ 12  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO employee
+  2  VALUES (
+  3    employee_s1.nextval
+  4  , 'Julie Davis'
+  5  , 'Associate'
+  6  , '20-OCT-15'
+  7  , NULL
+  8  , 'davisj@salon.com'
+  9  , '2089990000'
+ 10  , location_s1.currval
+ 11  , (SELECT employee_id FROM employee WHERE name = 'Olive Adams')
+ 12  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Jeana Bradford'
+  5  , 'jb@gmail.com'
+  6  , '1112223333'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Sandra Hobbs'
+  5  , 'sh@gmail.com'
+  6  , '1112223334'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Ryan Taylor'
+  5  , 'rt@gmail.com'
+  6  , '1112223335'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Michelle Drake'
+  5  , 'md@gmail.com'
+  6  , '1112223336'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Heidi Nolan'
+  5  , 'hn@gmail.com'
+  6  , '1112223337'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Karen Smith'
+  5  , 'ks@gmail.com'
+  6  , '1112223338'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO customer
+  2  VALUES (
+  3    customer_s1.nextval
+  4  , 'Jose Mendez'
+  5  , 'jm@gmail.com'
+  6  , '1112223339'
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Shampoo'
+  5  , 'Product'
+  6  , '8 oz'
+  7  , 4.95
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Shampoo'
+  5  , 'Product'
+  6  , '16 oz'
+  7  , 8.95
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Conditioner'
+  5  , 'Product'
+  6  , '12 oz'
+  7  , 8.95
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Hairspray'
+  5  , 'Product'
+  6  , '8 oz'
+  7  , 7.95
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Shampoo'
+  5  , 'Service'
+  6  , NULL
+  7  , 8.00
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Men Hair Cut'
+  5  , 'Service'
+  6  , NULL
+  7  , 15.00
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Women Hair Cut'
+  5  , 'Service'
+  6  , NULL
+  7  , 25.00
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Color'
+  5  , 'Service'
+  6  , NULL
+  7  , 50.00
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO product
+  2  VALUES (
+  3    product_s1.nextval
+  4  , 'Perm'
+  5  , 'Service'
+  6  , NULL
+  7  , 60.00
+  8  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- TRAN_1 --
+SQL> INSERT INTO tran
+  2  VALUES(
+  3    tran_s1.nextval
+  4  , '25-MAR-16'
+  5  , (SELECT employee_id FROM employee WHERE name = 'Jenny Jensen')
+  6  , (SELECT customer_id FROM customer WHERE name = 'Jose Mendez')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Shampoo' AND  unit_size = '8 oz' AND type = 'Product')
+  6  , (SELECT price FROM product WHERE name = 'Shampoo' AND  unit_size = '8 oz')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Men Hair Cut')
+  6  , (SELECT price FROM product  WHERE name = 'Men Hair Cut')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- TRAN_2 --
+SQL> INSERT INTO tran
+  2  VALUES(
+  3    tran_s1.nextval
+  4  , '25-MAR-16'
+  5  , (SELECT employee_id FROM employee WHERE name = 'Jenny Jensen')
+  6  , (SELECT customer_id FROM customer WHERE name = 'Karen Smith')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Conditioner')
+  6  , (SELECT price FROM product WHERE name = 'Conditioner')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Perm')
+  6  , (SELECT price FROM product WHERE name = 'Perm')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- TRAN_3 --
+SQL> INSERT INTO tran
+  2  VALUES(
+  3    tran_s1.nextval
+  4  , '25-MAR-16'
+  5  , (SELECT employee_id FROM employee WHERE name = 'Haley Lopez')
+  6  , (SELECT customer_id FROM customer WHERE name = 'Heidi Nolan')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Color')
+  6  , (SELECT price FROM product WHERE name = 'Color')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- TRAN_4 --
+SQL> INSERT INTO tran
+  2  VALUES(
+  3    tran_s1.nextval
+  4  , '25-MAR-16'
+  5  , (SELECT employee_id FROM employee WHERE name = 'Robert Green')
+  6  , (SELECT customer_id FROM customer WHERE name = 'Michelle Drake')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Women Hair Cut')
+  6  , (SELECT price FROM product  WHERE name = 'Women Hair Cut')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Shampoo' AND  unit_size = '16 oz')
+  6  , (SELECT price FROM product WHERE name = 'Shampoo' AND  unit_size = '16 oz')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- TRAN_5 --
+SQL> INSERT INTO tran
+  2  VALUES(
+  3    tran_s1.nextval
+  4  , '25-MAR-16'
+  5  , (SELECT employee_id FROM employee WHERE name = 'Olive Adams')
+  6  , (SELECT customer_id FROM customer WHERE name = 'Ryan Taylor')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO tran_detail
+  2  VALUES (
+  3    tran_detail_s1.nextval
+  4  , tran_s1.currval
+  5  , (SELECT product_id FROM product WHERE name = 'Men Hair Cut')
+  6  , (SELECT price FROM product WHERE name = 'Men Hair Cut')
+  7  );
+
+1 row created.
+
+SQL> 
+SQL> SPOOL OFF
